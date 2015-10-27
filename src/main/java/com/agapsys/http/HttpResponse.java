@@ -204,6 +204,21 @@ public class HttpResponse {
 	}
 
 	/**
+	 * Returns the first header with given name
+	 * @param name header name
+	 * @return first header with given name identified in the response or null if there is no such header
+	 */
+	public HttpHeader getFirstHeader(String name) {
+		for (HttpHeader header : getHeaders()) {
+			if (header.getName().equals(name)) {
+				return header;
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * Returns all headers
 	 * @return all the headers of this message.
 	 */
