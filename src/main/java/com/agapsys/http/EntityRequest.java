@@ -25,6 +25,8 @@ public abstract class EntityRequest extends HttpRequest {
 		super(uri);
 	}
 	
+	public EntityRequest() {}
+	
 	/** 
 	 * Returns the entity associated with this request.
 	 * @return the entity associated with this request.

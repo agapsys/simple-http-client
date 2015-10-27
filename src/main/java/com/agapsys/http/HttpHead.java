@@ -25,6 +25,8 @@ public class HttpHead extends HttpRequest {
 		super(uri);
 	}
 	
+	public HttpHead() {}
+	
 	@Override
 	protected HttpRequestBase getCoreRequest(String uri) {
 		return new org.apache.http.client.methods.HttpHead(uri);

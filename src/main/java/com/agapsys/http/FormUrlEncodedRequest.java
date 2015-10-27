@@ -38,6 +38,13 @@ public abstract class FormUrlEncodedRequest extends EntityRequest {
 		this.charset = charset;
 	}
 	
+	public FormUrlEncodedRequest(String charset) {
+		if (charset == null || charset.trim().isEmpty())
+			throw new IllegalArgumentException("Null/Empty charset");
+		
+		this.charset = charset;
+	}
+	
 	public String getCharset() {
 		return charset;
 	}

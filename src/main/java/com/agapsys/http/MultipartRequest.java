@@ -27,6 +27,8 @@ public abstract class MultipartRequest extends EntityRequest {
 	public MultipartRequest(String uri) {
 		super(uri);
 	}
+	
+	public MultipartRequest() {}
 
 	public void addFile(String name, File file, String mimeType) {
 		builder.addBinaryBody(name, file, ContentType.create(mimeType), name);

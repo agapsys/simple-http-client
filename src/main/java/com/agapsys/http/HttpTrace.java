@@ -20,9 +20,12 @@ import org.apache.http.client.methods.HttpRequestBase;
 
 /** Represents a HTTP 'TRACE' request. */
 public class HttpTrace extends HttpRequest {
-	public HttpTrace(String uri) throws IllegalArgumentException {
+	
+	public HttpTrace(String uri) {
 		super(uri);
 	}
+	
+	public HttpTrace() {}
 	
 	@Override
 	protected HttpRequestBase getCoreRequest(String uri) {

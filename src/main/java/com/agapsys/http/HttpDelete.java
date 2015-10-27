@@ -20,10 +20,13 @@ import org.apache.http.client.methods.HttpRequestBase;
 
 /** Represents a HTTP 'DELETE' request. */
 public class HttpDelete extends HttpRequest {
+	
 	public HttpDelete(String uri) {
 		super(uri);
 	}
-		
+	
+	public HttpDelete() {}
+	
 	@Override
 	protected HttpRequestBase getCoreRequest(String uri) {
 		return new org.apache.http.client.methods.HttpDelete(uri);

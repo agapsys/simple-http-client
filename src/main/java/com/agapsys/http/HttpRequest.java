@@ -23,7 +23,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 
 /** Represents an HTTP request. */
 public abstract class HttpRequest {
-	private final String uri;
+	private String uri;
 	private HttpRequestBase coreRequest = null;
 		
 	/** 
@@ -35,6 +35,8 @@ public abstract class HttpRequest {
 		this.uri = uri;
 	}
 	
+	public HttpRequest() {}
+	
 	@Override
 	public String toString() {
 		return String.format("%s %s", getMethod(), getUri());
@@ -45,6 +47,15 @@ public abstract class HttpRequest {
 	 * @return Request URI. */
 	public String getUri() {
 		return uri;
+	}
+	
+	/**
+	 * Sets request URI
+	 * @param uri 
+	 */
+	public void setUri(String uri) {
+		if (uri == null || uri.trim().isEmpty()) throw new IllegalArgumentException("Null/Empty URI");
+		this.uri = uri;
 	}
 	
 	/**
@@ -64,7 +75,7 @@ public abstract class HttpRequest {
 	 * Returns wrapped request instance.
 	 * @return wrapped request instance.
 	 */
-	protected HttpRequestBase getCoreRequest() {
+	protected final HttpRequestBase getCoreRequest() {
 		if (coreRequest == null)
 			coreRequest = getCoreRequest(uri);
 		

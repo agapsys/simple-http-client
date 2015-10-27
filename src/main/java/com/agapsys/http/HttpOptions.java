@@ -20,9 +20,12 @@ import org.apache.http.client.methods.HttpRequestBase;
 
 /** Represents a HTTP 'OPTIONS' request. */
 public class HttpOptions extends HttpRequest {
+	
 	public HttpOptions(String uri) {
 		super(uri);
 	}
+	
+	public HttpOptions() {}
 	
 	@Override
 	protected HttpRequestBase getCoreRequest(String uri) {

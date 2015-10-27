@@ -29,6 +29,10 @@ public abstract class StringEntityRequest extends EntityRequest {
 		super(uri);
 		contentType = ContentType.create(mimeType, charset);
 	}
+	
+	public StringEntityRequest(String mimeType, String charset) {
+		contentType = ContentType.create(mimeType, charset);
+	}
 
 	public final String getMimeType() {
 		return contentType.getMimeType();
