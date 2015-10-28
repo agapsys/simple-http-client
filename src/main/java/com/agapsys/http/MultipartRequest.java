@@ -18,10 +18,62 @@ package com.agapsys.http;
 
 import java.io.File;
 import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 
 public abstract class MultipartRequest extends EntityRequest {
+	// CLASS SCOPE =============================================================
+	public static class MultipartRequestPost extends MultipartRequest {
+
+		public MultipartRequestPost(String uri) {
+			super(uri);
+		}
+
+		public MultipartRequestPost() {
+			super();
+		}
+
+		@Override
+		protected HttpRequestBase getCoreRequest(String uri) {
+			return new org.apache.http.client.methods.HttpPost(uri);
+		}
+	}
+	
+	public static class MultipartRequestPut extends MultipartRequest {
+
+		public MultipartRequestPut(String uri) {
+			super(uri);
+		}
+
+		public MultipartRequestPut() {
+			super();
+		}
+
+		@Override
+		protected HttpRequestBase getCoreRequest(String uri) {
+			return new org.apache.http.client.methods.HttpPut(uri);
+		}
+	}
+	
+	public static class MultipartRequestPatch extends MultipartRequest {
+
+		public MultipartRequestPatch(String uri) {
+			super(uri);
+		}
+
+		public MultipartRequestPatch() {
+			super();
+		}
+
+		@Override
+		protected HttpRequestBase getCoreRequest(String uri) {
+			return new org.apache.http.client.methods.HttpPatch(uri);
+		}
+	}
+	// =========================================================================
+	
+	// INSTANCE SCOPE ==========================================================
 	private final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 
 	public MultipartRequest(String uri) {
@@ -58,4 +110,5 @@ public abstract class MultipartRequest extends EntityRequest {
 	protected HttpEntity getEntity() {
 		return builder.build();
 	}
+	// =========================================================================
 }

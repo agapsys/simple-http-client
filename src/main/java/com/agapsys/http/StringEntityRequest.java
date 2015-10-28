@@ -17,10 +17,62 @@
 package com.agapsys.http;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 
 public abstract class StringEntityRequest extends EntityRequest {
+	// CLASS SCOPE =============================================================
+	public static class StringEntityPost extends StringEntityRequest {
+
+		public StringEntityPost(String uri, String mimeType, String charset) {
+			super(uri, mimeType, charset);
+		}
+
+		public StringEntityPost(String mimeType, String charset) {
+			super(mimeType, charset);
+		}
+
+		@Override
+		protected HttpRequestBase getCoreRequest(String uri) {
+			return new org.apache.http.client.methods.HttpPost(uri);
+		}
+	}
+	
+	public static class StringEntityPut extends StringEntityRequest {
+
+		public StringEntityPut(String uri, String mimeType, String charset) {
+			super(uri, mimeType, charset);
+		}
+
+		public StringEntityPut(String mimeType, String charset) {
+			super(mimeType, charset);
+		}
+
+		@Override
+		protected HttpRequestBase getCoreRequest(String uri) {
+			return new org.apache.http.client.methods.HttpPut(uri);
+		}
+	}
+	
+	public static class StringEntityPatch extends StringEntityRequest {
+
+		public StringEntityPatch(String uri, String mimeType, String charset) {
+			super(uri, mimeType, charset);
+		}
+
+		public StringEntityPatch(String mimeType, String charset) {
+			super(mimeType, charset);
+		}
+
+		@Override
+		protected HttpRequestBase getCoreRequest(String uri) {
+			return new org.apache.http.client.methods.HttpPatch(uri);
+		}
+	}
+	// =========================================================================
+	
+	// INSTANCE SCOPE ==========================================================
 	private final ContentType contentType;
 	
 	private String contentBody = "";
@@ -55,4 +107,5 @@ public abstract class StringEntityRequest extends EntityRequest {
 	protected HttpEntity getEntity() {
 		return new StringEntity(contentBody, contentType);
 	}
+	// =========================================================================
 }

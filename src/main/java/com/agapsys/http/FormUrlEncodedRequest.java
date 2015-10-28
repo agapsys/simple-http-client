@@ -24,9 +24,61 @@ import java.util.Map;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.message.BasicNameValuePair;
 
 public abstract class FormUrlEncodedRequest extends EntityRequest {
+	// CLASS SCOPE =============================================================
+	public static class FormUrlEncodedPost extends FormUrlEncodedRequest {
+
+		public FormUrlEncodedPost(String uri, String charset) {
+			super(uri, charset);
+		}
+
+		public FormUrlEncodedPost(String charset) {
+			super(charset);
+		}
+
+		@Override
+		protected HttpRequestBase getCoreRequest(String uri) {
+			return new org.apache.http.client.methods.HttpPost(uri);
+		}
+	}
+	
+	public static class FormUrlEncodedPut extends FormUrlEncodedRequest {
+
+		public FormUrlEncodedPut(String uri, String charset) {
+			super(uri, charset);
+		}
+
+		public FormUrlEncodedPut(String charset) {
+			super(charset);
+		}
+
+		@Override
+		protected HttpRequestBase getCoreRequest(String uri) {
+			return new org.apache.http.client.methods.HttpPut(uri);
+		}
+	}
+	
+	public static class FormUrlEncodedPatch extends FormUrlEncodedRequest {
+
+		public FormUrlEncodedPatch(String uri, String charset) {
+			super(uri, charset);
+		}
+
+		public FormUrlEncodedPatch(String charset) {
+			super(charset);
+		}
+
+		@Override
+		protected HttpRequestBase getCoreRequest(String uri) {
+			return new org.apache.http.client.methods.HttpPatch(uri);
+		}
+	}
+	// =========================================================================
+	
+	// INSTANCE SCOPE ==========================================================
 	private final Map<String, String> params = new LinkedHashMap<>();
 	private final String charset;
 
@@ -77,4 +129,5 @@ public abstract class FormUrlEncodedRequest extends EntityRequest {
 			throw new RuntimeException(ex);
 		}
 	}
+	// =========================================================================
 }
