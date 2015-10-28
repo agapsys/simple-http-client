@@ -24,13 +24,13 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 
 public abstract class MultipartRequest extends EntityRequest {
 	// CLASS SCOPE =============================================================
-	public static class MultipartRequestPost extends MultipartRequest {
+	public static class MultipartPost extends MultipartRequest {
 
-		public MultipartRequestPost(String uri) {
+		public MultipartPost(String uri) {
 			super(uri);
 		}
 
-		public MultipartRequestPost() {
+		public MultipartPost() {
 			super();
 		}
 
@@ -40,13 +40,13 @@ public abstract class MultipartRequest extends EntityRequest {
 		}
 	}
 	
-	public static class MultipartRequestPut extends MultipartRequest {
+	public static class MultipartPut extends MultipartRequest {
 
-		public MultipartRequestPut(String uri) {
+		public MultipartPut(String uri) {
 			super(uri);
 		}
 
-		public MultipartRequestPut() {
+		public MultipartPut() {
 			super();
 		}
 
@@ -56,13 +56,13 @@ public abstract class MultipartRequest extends EntityRequest {
 		}
 	}
 	
-	public static class MultipartRequestPatch extends MultipartRequest {
+	public static class MultipartPatch extends MultipartRequest {
 
-		public MultipartRequestPatch(String uri) {
+		public MultipartPatch(String uri) {
 			super(uri);
 		}
 
-		public MultipartRequestPatch() {
+		public MultipartPatch() {
 			super();
 		}
 
