@@ -39,7 +39,12 @@ public abstract class HttpRequest {
 	
 	@Override
 	public String toString() {
-		return String.format("%s %s", getMethod(), getUri());
+		boolean coreRequestWasNull = (coreRequest == null);
+		String str = String.format("%s %s", getMethod(), getUri());
+		if (coreRequestWasNull)
+			coreRequest = null;
+		
+		return str;
 	}
 	
 	/**
