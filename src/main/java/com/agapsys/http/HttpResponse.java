@@ -237,6 +237,23 @@ public class HttpResponse {
 	}
 	
 	/**
+	 * Returns all headers with given name.
+	 * @param name header name
+	 * @return list of header with given name
+	 */
+	public List<HttpHeader> getHeaders(String name) {
+		List<HttpHeader> filteredHeaders = new LinkedList<>();
+		
+		for (HttpHeader header : getHeaders()) {
+			if (header.getName().equals(name)) {
+				filteredHeaders.add(header);
+			}
+		}
+		
+		return Collections.unmodifiableList(filteredHeaders);
+	}
+	
+	/**
 	 * Closes this response
 	 * @throws IOException if an I/O error happened during response closing.
 	 */
