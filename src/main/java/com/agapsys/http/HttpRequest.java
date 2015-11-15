@@ -33,7 +33,7 @@ public abstract class HttpRequest {
 	 */
 	public HttpRequest(String uri, Object...uriParams) {
 		if (uri == null || uri.trim().isEmpty()) throw new IllegalArgumentException("Null/Empty URI");
-		uri = String.format(uri, (Object) uriParams);
+		uri = String.format(uri, uriParams);
 		this.uri = uri;
 	}
 	
