@@ -21,8 +21,8 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 
 public abstract class EntityRequest extends HttpRequest {
 	
-	public EntityRequest(String uri) {
-		super(uri);
+	public EntityRequest(String uri, String...uriParams) {
+		super(uri, uriParams);
 	}
 	
 	public EntityRequest() {}

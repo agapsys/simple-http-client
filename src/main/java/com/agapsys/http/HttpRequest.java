@@ -29,9 +29,11 @@ public abstract class HttpRequest {
 	/** 
 	 * Constructor.
 	 * @param uri request URI
+	 * @param uriParams parameters passed to format the string passed as URI
 	 */
-	public HttpRequest(String uri) {
+	public HttpRequest(String uri, String...uriParams) {
 		if (uri == null || uri.trim().isEmpty()) throw new IllegalArgumentException("Null/Empty URI");
+		uri = String.format(uri, (Object) uriParams);
 		this.uri = uri;
 	}
 	

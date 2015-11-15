@@ -25,8 +25,8 @@ public abstract class StringEntityRequest extends EntityRequest {
 	// CLASS SCOPE =============================================================
 	public static class StringEntityPost extends StringEntityRequest {
 
-		public StringEntityPost(String uri, String mimeType, String charset) {
-			super(uri, mimeType, charset);
+		public StringEntityPost(String mimeType, String charset, String uri, String...uriParams) {
+			super(mimeType, charset, uri, uriParams);
 		}
 
 		public StringEntityPost(String mimeType, String charset) {
@@ -41,8 +41,8 @@ public abstract class StringEntityRequest extends EntityRequest {
 	
 	public static class StringEntityPut extends StringEntityRequest {
 
-		public StringEntityPut(String uri, String mimeType, String charset) {
-			super(uri, mimeType, charset);
+		public StringEntityPut(String mimeType, String charset, String uri, String...uriParams) {
+			super(mimeType, charset, uri, uriParams);
 		}
 
 		public StringEntityPut(String mimeType, String charset) {
@@ -57,8 +57,8 @@ public abstract class StringEntityRequest extends EntityRequest {
 	
 	public static class StringEntityPatch extends StringEntityRequest {
 
-		public StringEntityPatch(String uri, String mimeType, String charset) {
-			super(uri, mimeType, charset);
+		public StringEntityPatch(String mimeType, String charset, String uri, String...uriParams) {
+			super(mimeType, charset, uri, uriParams);
 		}
 
 		public StringEntityPatch(String mimeType, String charset) {
@@ -77,8 +77,8 @@ public abstract class StringEntityRequest extends EntityRequest {
 	
 	private String contentBody = "";
 
-	public StringEntityRequest(String uri, String mimeType, String charset) {
-		super(uri);
+	public StringEntityRequest(String mimeType, String charset, String uri, String...uriParams) {
+		super(uri, uriParams);
 		contentType = ContentType.create(mimeType, charset);
 	}
 	

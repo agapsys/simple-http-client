@@ -26,8 +26,8 @@ public abstract class MultipartRequest extends EntityRequest {
 	// CLASS SCOPE =============================================================
 	public static class MultipartPost extends MultipartRequest {
 
-		public MultipartPost(String uri) {
-			super(uri);
+		public MultipartPost(String uri, String...uriParams) {
+			super(uri, uriParams);
 		}
 
 		public MultipartPost() {
@@ -42,8 +42,8 @@ public abstract class MultipartRequest extends EntityRequest {
 	
 	public static class MultipartPut extends MultipartRequest {
 
-		public MultipartPut(String uri) {
-			super(uri);
+		public MultipartPut(String uri, String...uriParams) {
+			super(uri, uriParams);
 		}
 
 		public MultipartPut() {
@@ -58,8 +58,8 @@ public abstract class MultipartRequest extends EntityRequest {
 	
 	public static class MultipartPatch extends MultipartRequest {
 
-		public MultipartPatch(String uri) {
-			super(uri);
+		public MultipartPatch(String uri, String...uriParams) {
+			super(uri, uriParams);
 		}
 
 		public MultipartPatch() {
@@ -76,8 +76,8 @@ public abstract class MultipartRequest extends EntityRequest {
 	// INSTANCE SCOPE ==========================================================
 	private final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 
-	public MultipartRequest(String uri) {
-		super(uri);
+	public MultipartRequest(String uri, String...uriParams) {
+		super(uri, uriParams);
 	}
 	
 	public MultipartRequest() {}

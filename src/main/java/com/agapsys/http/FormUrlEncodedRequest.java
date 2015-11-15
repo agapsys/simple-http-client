@@ -31,8 +31,8 @@ public abstract class FormUrlEncodedRequest extends EntityRequest {
 	// CLASS SCOPE =============================================================
 	public static class FormUrlEncodedPost extends FormUrlEncodedRequest {
 
-		public FormUrlEncodedPost(String uri, String charset) {
-			super(uri, charset);
+		public FormUrlEncodedPost(String charset, String uri, String...uriParams) {
+			super(charset, uri, uriParams);
 		}
 
 		public FormUrlEncodedPost(String charset) {
@@ -47,8 +47,8 @@ public abstract class FormUrlEncodedRequest extends EntityRequest {
 	
 	public static class FormUrlEncodedPut extends FormUrlEncodedRequest {
 
-		public FormUrlEncodedPut(String uri, String charset) {
-			super(uri, charset);
+		public FormUrlEncodedPut(String charset, String uri, String...uriParams) {
+			super(charset, uri, uriParams);
 		}
 
 		public FormUrlEncodedPut(String charset) {
@@ -63,8 +63,8 @@ public abstract class FormUrlEncodedRequest extends EntityRequest {
 	
 	public static class FormUrlEncodedPatch extends FormUrlEncodedRequest {
 
-		public FormUrlEncodedPatch(String uri, String charset) {
-			super(uri, charset);
+		public FormUrlEncodedPatch(String charset, String uri, String...uriParams) {
+			super(charset, uri, uriParams);
 		}
 
 		public FormUrlEncodedPatch(String charset) {
@@ -82,8 +82,8 @@ public abstract class FormUrlEncodedRequest extends EntityRequest {
 	private final Map<String, String> params = new LinkedHashMap<>();
 	private final String charset;
 
-	public FormUrlEncodedRequest(String uri, String charset) {
-		super(uri);
+	public FormUrlEncodedRequest(String charset, String uri, String...uriParams) {
+		super(uri, uriParams);
 		if (charset == null || charset.trim().isEmpty())
 			throw new IllegalArgumentException("Null/Empty charset");
 		
