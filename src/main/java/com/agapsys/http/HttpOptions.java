@@ -21,7 +21,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 /** Represents a HTTP 'OPTIONS' request. */
 public class HttpOptions extends HttpRequest {
 	
-	public HttpOptions(String uri, String...uriParams) {
+	public HttpOptions(String uri, Object...uriParams) {
 		super(uri, uriParams);
 	}
 	

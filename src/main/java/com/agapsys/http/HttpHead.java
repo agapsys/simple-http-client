@@ -21,7 +21,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 /** Represents a HTTP 'HEAD' request. */
 public class HttpHead extends HttpRequest {
 	
-	public HttpHead(String uri, String...uriParams) {
+	public HttpHead(String uri, Object...uriParams) {
 		super(uri, uriParams);
 	}
 	

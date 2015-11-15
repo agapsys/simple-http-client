@@ -21,7 +21,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 /** Represents a HTTP 'DELETE' request. */
 public class HttpDelete extends HttpRequest {
 	
-	public HttpDelete(String uri, String...uriParams) {
+	public HttpDelete(String uri, Object...uriParams) {
 		super(uri, uriParams);
 	}
 	

@@ -21,7 +21,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 /** Represents a HTTP 'GET' request. */
 public class HttpGet extends HttpRequest {
 	
-	public HttpGet(String uri, String...uriParams) {
+	public HttpGet(String uri, Object...uriParams) {
 		super(uri, uriParams);
 	}
 

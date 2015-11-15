@@ -21,7 +21,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 /** Represents a HTTP 'TRACE' request. */
 public class HttpTrace extends HttpRequest {
 	
-	public HttpTrace(String uri, String...uriParams) {
+	public HttpTrace(String uri, Object...uriParams) {
 		super(uri, uriParams);
 	}
 	
