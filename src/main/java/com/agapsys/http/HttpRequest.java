@@ -17,6 +17,8 @@
 package com.agapsys.http;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -32,7 +34,19 @@ public abstract class HttpRequest {
 	 * @param uriParams parameters passed to format the string passed as URI
 	 */
 	public HttpRequest(String uri, Object...uriParams) {
-		if (uri == null || uri.trim().isEmpty()) throw new IllegalArgumentException("Null/Empty URI");
+		if (uri == null || uri.trim().isEmpty()) 
+			throw new IllegalArgumentException("Null/Empty URI");
+		
+		for (int i = 0; i < uriParams.length; i++) {
+			
+			if (uriParams[i] instanceof String) {
+				try {
+					uriParams[i] = URLEncoder.encode((String) uriParams[i], "utf-8");
+				} catch (UnsupportedEncodingException ex) {
+					throw new RuntimeException(ex);
+				}
+			}
+		}
 		uri = String.format(uri, uriParams);
 		this.uri = uri;
 	}
