@@ -37,17 +37,19 @@ public abstract class HttpRequest {
 		if (uri == null || uri.trim().isEmpty()) 
 			throw new IllegalArgumentException("Null/Empty URI");
 		
-		for (int i = 0; i < uriParams.length; i++) {
-			
-			if (uriParams[i] instanceof String) {
-				try {
-					uriParams[i] = URLEncoder.encode((String) uriParams[i], "utf-8");
-				} catch (UnsupportedEncodingException ex) {
-					throw new RuntimeException(ex);
+		if (uriParams.length > 0) {
+			for (int i = 0; i < uriParams.length; i++) {
+
+				if (uriParams[i] instanceof String) {
+					try {
+						uriParams[i] = URLEncoder.encode((String) uriParams[i], "utf-8");
+					} catch (UnsupportedEncodingException ex) {
+						throw new RuntimeException(ex);
+					}
 				}
 			}
+			uri = String.format(uri, uriParams);
 		}
-		uri = String.format(uri, uriParams);
 		this.uri = uri;
 	}
 	
