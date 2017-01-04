@@ -20,15 +20,15 @@ import org.apache.http.client.methods.HttpRequestBase;
 
 /** Represents a HTTP 'HEAD' request. */
 public class HttpHead extends HttpRequest {
-	
-	public HttpHead(String uri, Object...uriParams) {
-		super(uri, uriParams);
-	}
-	
-	public HttpHead() {}
-	
-	@Override
-	protected HttpRequestBase getCoreRequest(String uri) {
-		return new org.apache.http.client.methods.HttpHead(uri);
-	}
+    
+    public HttpHead(String uri, Object...uriParams) {
+        super(uri, uriParams);
+    }
+    
+    public HttpHead() {}
+    
+    @Override
+    protected HttpRequestBase getCoreRequest(String uri) {
+        return new org.apache.http.client.methods.HttpHead(uri);
+    }
 }

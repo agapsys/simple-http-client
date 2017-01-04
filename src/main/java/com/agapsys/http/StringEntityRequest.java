@@ -22,90 +22,90 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 
 public abstract class StringEntityRequest extends EntityRequest {
-	// CLASS SCOPE =============================================================
-	public static class StringEntityPost extends StringEntityRequest {
+    // CLASS SCOPE =============================================================
+    public static class StringEntityPost extends StringEntityRequest {
 
-		public StringEntityPost(String mimeType, String charset, String uri, Object...uriParams) {
-			super(mimeType, charset, uri, uriParams);
-		}
+        public StringEntityPost(String mimeType, String charset, String uri, Object...uriParams) {
+            super(mimeType, charset, uri, uriParams);
+        }
 
-		public StringEntityPost(String mimeType, String charset) {
-			super(mimeType, charset);
-		}
+        public StringEntityPost(String mimeType, String charset) {
+            super(mimeType, charset);
+        }
 
-		@Override
-		protected HttpRequestBase getCoreRequest(String uri) {
-			return new org.apache.http.client.methods.HttpPost(uri);
-		}
-	}
-	
-	public static class StringEntityPut extends StringEntityRequest {
+        @Override
+        protected HttpRequestBase getCoreRequest(String uri) {
+            return new org.apache.http.client.methods.HttpPost(uri);
+        }
+    }
+    
+    public static class StringEntityPut extends StringEntityRequest {
 
-		public StringEntityPut(String mimeType, String charset, String uri, Object...uriParams) {
-			super(mimeType, charset, uri, uriParams);
-		}
+        public StringEntityPut(String mimeType, String charset, String uri, Object...uriParams) {
+            super(mimeType, charset, uri, uriParams);
+        }
 
-		public StringEntityPut(String mimeType, String charset) {
-			super(mimeType, charset);
-		}
+        public StringEntityPut(String mimeType, String charset) {
+            super(mimeType, charset);
+        }
 
-		@Override
-		protected HttpRequestBase getCoreRequest(String uri) {
-			return new org.apache.http.client.methods.HttpPut(uri);
-		}
-	}
-	
-	public static class StringEntityPatch extends StringEntityRequest {
+        @Override
+        protected HttpRequestBase getCoreRequest(String uri) {
+            return new org.apache.http.client.methods.HttpPut(uri);
+        }
+    }
+    
+    public static class StringEntityPatch extends StringEntityRequest {
 
-		public StringEntityPatch(String mimeType, String charset, String uri, Object...uriParams) {
-			super(mimeType, charset, uri, uriParams);
-		}
+        public StringEntityPatch(String mimeType, String charset, String uri, Object...uriParams) {
+            super(mimeType, charset, uri, uriParams);
+        }
 
-		public StringEntityPatch(String mimeType, String charset) {
-			super(mimeType, charset);
-		}
+        public StringEntityPatch(String mimeType, String charset) {
+            super(mimeType, charset);
+        }
 
-		@Override
-		protected HttpRequestBase getCoreRequest(String uri) {
-			return new org.apache.http.client.methods.HttpPatch(uri);
-		}
-	}
-	// =========================================================================
-	
-	// INSTANCE SCOPE ==========================================================
-	private final ContentType contentType;
-	
-	private String contentBody = "";
+        @Override
+        protected HttpRequestBase getCoreRequest(String uri) {
+            return new org.apache.http.client.methods.HttpPatch(uri);
+        }
+    }
+    // =========================================================================
+    
+    // INSTANCE SCOPE ==========================================================
+    private final ContentType contentType;
+    
+    private String contentBody = "";
 
-	public StringEntityRequest(String mimeType, String charset, String uri, Object...uriParams) {
-		super(uri, uriParams);
-		contentType = ContentType.create(mimeType, charset);
-	}
-	
-	public StringEntityRequest(String mimeType, String charset) {
-		contentType = ContentType.create(mimeType, charset);
-	}
+    public StringEntityRequest(String mimeType, String charset, String uri, Object...uriParams) {
+        super(uri, uriParams);
+        contentType = ContentType.create(mimeType, charset);
+    }
+    
+    public StringEntityRequest(String mimeType, String charset) {
+        contentType = ContentType.create(mimeType, charset);
+    }
 
-	public final String getMimeType() {
-		return contentType.getMimeType();
-	}
-	
-	public final String getCharset() {
-		return contentType.getCharset().name();
-	}
-		
-	public final String getContentBody() {
-		return contentBody;
-	}
-	
-	public final void setContentBody(String contentBody) {
-		if (contentType == null) throw new IllegalArgumentException("Null content body");
-		this.contentBody = contentBody;
-	}
+    public final String getMimeType() {
+        return contentType.getMimeType();
+    }
+    
+    public final String getCharset() {
+        return contentType.getCharset().name();
+    }
+        
+    public final String getContentBody() {
+        return contentBody;
+    }
+    
+    public final void setContentBody(String contentBody) {
+        if (contentType == null) throw new IllegalArgumentException("Null content body");
+        this.contentBody = contentBody;
+    }
 
-	@Override
-	protected HttpEntity getEntity() {
-		return new StringEntity(contentBody, contentType);
-	}
-	// =========================================================================
+    @Override
+    protected HttpEntity getEntity() {
+        return new StringEntity(contentBody, contentType);
+    }
+    // =========================================================================
 }

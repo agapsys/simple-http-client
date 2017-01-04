@@ -20,15 +20,15 @@ import org.apache.http.client.methods.HttpRequestBase;
 
 /** Represents a HTTP 'OPTIONS' request. */
 public class HttpOptions extends HttpRequest {
-	
-	public HttpOptions(String uri, Object...uriParams) {
-		super(uri, uriParams);
-	}
-	
-	public HttpOptions() {}
-	
-	@Override
-	protected HttpRequestBase getCoreRequest(String uri) {
-		return new org.apache.http.client.methods.HttpOptions(uri);
-	}
+    
+    public HttpOptions(String uri, Object...uriParams) {
+        super(uri, uriParams);
+    }
+    
+    public HttpOptions() {}
+    
+    @Override
+    protected HttpRequestBase getCoreRequest(String uri) {
+        return new org.apache.http.client.methods.HttpOptions(uri);
+    }
 }

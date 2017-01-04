@@ -22,19 +22,19 @@ import org.apache.http.message.BasicHeaderElement;
 
 /** Represents a HTTP header. */
 public class HttpHeader extends NameValuePair implements org.apache.http.Header {
-	private final HeaderElement[] headerElements;
+    private final HeaderElement[] headerElements;
 
-	public HttpHeader(String name, String value) {
-		super(name, value);
-		this.headerElements = new HeaderElement[] {new BasicHeaderElement(super.getValue(), null)};
-	}
+    public HttpHeader(String name, String value) {
+        super(name, value);
+        this.headerElements = new HeaderElement[] {new BasicHeaderElement(super.getValue(), null)};
+    }
 
-	HttpHeader(org.apache.http.Header header) {
-		this(header.getName(), header.getValue());
-	}
+    HttpHeader(org.apache.http.Header header) {
+        this(header.getName(), header.getValue());
+    }
 
-	@Override
-	public HeaderElement[] getElements() throws ParseException {
-		return headerElements;
-	}
+    @Override
+    public HeaderElement[] getElements() throws ParseException {
+        return headerElements;
+    }
 }

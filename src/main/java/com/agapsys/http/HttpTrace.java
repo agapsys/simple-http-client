@@ -20,15 +20,15 @@ import org.apache.http.client.methods.HttpRequestBase;
 
 /** Represents a HTTP 'TRACE' request. */
 public class HttpTrace extends HttpRequest {
-	
-	public HttpTrace(String uri, Object...uriParams) {
-		super(uri, uriParams);
-	}
-	
-	public HttpTrace() {}
-	
-	@Override
-	protected HttpRequestBase getCoreRequest(String uri) {
-		return new org.apache.http.client.methods.HttpTrace(uri);
-	}
+    
+    public HttpTrace(String uri, Object...uriParams) {
+        super(uri, uriParams);
+    }
+    
+    public HttpTrace() {}
+    
+    @Override
+    protected HttpRequestBase getCoreRequest(String uri) {
+        return new org.apache.http.client.methods.HttpTrace(uri);
+    }
 }

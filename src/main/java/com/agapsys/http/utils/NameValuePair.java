@@ -18,27 +18,27 @@ package com.agapsys.http.utils;
 
 public class NameValuePair extends Pair<String, String> {
 
-	/**
-	 * Constructor.
-	 * @param name instance name
-	 * @param value instance value
-	 * @throws IllegalArgumentException if ((name == null || name.isEmpty()) || (value == null))
-	 */
-	public NameValuePair(String name, String value) throws IllegalArgumentException {
-		super(name, value);
-		
-		if (name == null || name.isEmpty())
-			throw new IllegalArgumentException("Null/Empty name");
-		
-		if (value == null)
-			throw new IllegalArgumentException("Null value");
-	}
+    /**
+     * Constructor.
+     * @param name instance name
+     * @param value instance value
+     * @throws IllegalArgumentException if ((name == null || name.isEmpty()) || (value == null))
+     */
+    public NameValuePair(String name, String value) throws IllegalArgumentException {
+        super(name, value);
+        
+        if (name == null || name.isEmpty())
+            throw new IllegalArgumentException("Null/Empty name");
+        
+        if (value == null)
+            throw new IllegalArgumentException("Null value");
+    }
 
-	public String getName() {
-		return super.getFirst();
-	}
+    public String getName() {
+        return super.getFirst();
+    }
 
-	public String getValue() {
-		return super.getSecond();
-	}	
+    public String getValue() {
+        return super.getSecond();
+    }    
 }

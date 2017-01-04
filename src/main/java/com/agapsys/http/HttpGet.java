@@ -20,15 +20,15 @@ import org.apache.http.client.methods.HttpRequestBase;
 
 /** Represents a HTTP 'GET' request. */
 public class HttpGet extends HttpRequest {
-	
-	public HttpGet(String uri, Object...uriParams) {
-		super(uri, uriParams);
-	}
+    
+    public HttpGet(String uri, Object...uriParams) {
+        super(uri, uriParams);
+    }
 
-	public HttpGet() {}
-	
-	@Override
-	protected HttpRequestBase getCoreRequest(String uri) {
-		return new org.apache.http.client.methods.HttpGet(uri);
-	}
+    public HttpGet() {}
+    
+    @Override
+    protected HttpRequestBase getCoreRequest(String uri) {
+        return new org.apache.http.client.methods.HttpGet(uri);
+    }
 }
