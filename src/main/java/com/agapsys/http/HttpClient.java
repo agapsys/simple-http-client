@@ -19,6 +19,7 @@ package com.agapsys.http;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
@@ -28,8 +29,22 @@ import org.apache.http.impl.client.HttpClientBuilder;
  */
 public class HttpClient {
     private final List<HttpHeader> defaultHeaders = new LinkedList<>();
+    private final boolean enableRedirects;
+
     private CloseableHttpClient wrappedClient = null;
-        
+
+    public HttpClient() {
+        this(false);
+    }
+
+    public HttpClient(boolean enableRedirects) {
+        this.enableRedirects = enableRedirects;
+    }
+
+    public final boolean areRedirectsEnabled() {
+        return enableRedirects;
+    }
+
     /**
      * Adds given default header to be sent on each request using this client.
      * @param name header name
@@ -47,22 +62,22 @@ public class HttpClient {
     public void addDefaultHeaders(HttpHeader...headers) throws IllegalArgumentException {
         if (headers.length == 0)
             throw new IllegalArgumentException("Empty headers");
-        
+
         int i = 0;
         for (HttpHeader header : headers) {
             if (header == null)
                 throw new IllegalArgumentException("Null header on index " + i);
-            
+
             addDefaultHeader(header.getName(), header.getValue());
             i++;
         }
     }
-    
+
     /** Removes all registered default headers. */
     public void clearDefaultHeaders() {
         defaultHeaders.clear();
     }
-    
+
     /**
      * Returns default headers associated with this client.
      * @return default headers associated with this client.
@@ -70,7 +85,7 @@ public class HttpClient {
     public List<HttpHeader> getDefaultHeaders() {
         return defaultHeaders;
     }
-    
+
     /**
      * Releases all resources associated with this client.
      * Calling this method before
@@ -78,22 +93,22 @@ public class HttpClient {
      */
     public void close() throws IOException {
         if (wrappedClient == null) throw new IOException("Client was not initialized");
-        
+
         wrappedClient.close();
         wrappedClient = null;
     }
-    
+
     /**
      * Returns wrapped client instance.
      * @return wrapped client instance.
      */
     protected CloseableHttpClient getWrappedClient() {
         if (wrappedClient == null) {
-            HttpClientBuilder builder = HttpClientBuilder.create();
+            HttpClientBuilder builder = HttpClientBuilder.create().setDefaultRequestConfig(RequestConfig.custom().setRedirectsEnabled(areRedirectsEnabled()).build());
             builder.setDefaultHeaders(getDefaultHeaders());
             wrappedClient = builder.build();
         }
-        
+
         return wrappedClient;
     }
 }
