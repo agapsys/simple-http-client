@@ -23,7 +23,7 @@ public class HttpCookie {
     private static NameValuePair __getEntry(String token, String delimiter) {
         String[] mTokens = token.split(Pattern.quote(delimiter));
 
-        return new NameValuePair(mTokens[0], mTokens.length > 1 ? mTokens[1] : null);
+        return new NameValuePair(mTokens[0].trim(), mTokens.length > 1 ? mTokens[1].trim() : null);
     }
 
     public String  name;
