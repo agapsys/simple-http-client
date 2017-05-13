@@ -26,10 +26,10 @@ public class NameValuePair extends Pair<String, String> {
      */
     public NameValuePair(String name, String value) throws IllegalArgumentException {
         super(name, value);
-        
+
         if (name == null || name.isEmpty())
             throw new IllegalArgumentException("Null/Empty name");
-        
+
         if (value == null)
             throw new IllegalArgumentException("Null value");
     }
@@ -40,5 +40,5 @@ public class NameValuePair extends Pair<String, String> {
 
     public String getValue() {
         return super.getSecond();
-    }    
+    }
 }

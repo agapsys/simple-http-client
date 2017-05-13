@@ -20,9 +20,12 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.ProtocolVersion;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -37,7 +40,7 @@ public class HttpResponse {
         private final String charset;
         private final InputStream contentInputStream;
         private final int contentLength;
-        
+
         private StringResponse(HttpResponse response, String charset, long maxLength) throws IOException {
             super(response.getWrappedResponse());
             content = consumeEntity(maxLength);
@@ -69,11 +72,11 @@ public class HttpResponse {
 
            return responseBody;
        }
-        
+
         public String getCharset() {
             return charset;
         }
-        
+
         @Override
         public InputStream getContentInputStream() throws IOException {
             return contentInputStream;
@@ -83,12 +86,12 @@ public class HttpResponse {
         public long getContentLength() {
             return contentLength;
         }
-        
+
         public String getContentString() {
             return content;
         }
     }
-    
+
     /**
      * Executes given request, consume the response and returns a string representation of it.
      * @param request HTTP request to be executed
@@ -103,7 +106,7 @@ public class HttpResponse {
         client.close();
         return response;
     }
-    
+
     /**
      * Executes given request, consume the response and returns a string representation of it.
      * @param client client used to execute the request.
@@ -120,13 +123,14 @@ public class HttpResponse {
         return strResp;
     }
     // =========================================================================
-    
+
     // INSTANCE SCOPE ==========================================================
     private final CloseableHttpResponse wrappedResponse;
-    
-    private List<HttpHeader> headers = null;
-    
-    /** 
+
+    private List<HttpHeader>        headers   = null;
+    private Map<String, HttpCookie> cookieMap = null;
+
+    /**
      * Constructor.
      * Wraps a {@linkplain org.apache.http.HttpResponse} instance.
      * @param wrappedResponse wrapped response
@@ -135,7 +139,7 @@ public class HttpResponse {
         if (wrappedResponse == null) throw new IllegalArgumentException("Wrapped response cannot be null");
         this.wrappedResponse = wrappedResponse;
     }
-    
+
     /**
      * Returns wrapped response passed in constructor.
      * @return wrapped response passed in constructor.
@@ -143,7 +147,7 @@ public class HttpResponse {
     protected CloseableHttpResponse getWrappedResponse() {
         return wrappedResponse;
     }
-    
+
     /**
      * Return the HTTP status code.
      * @return HTTP status code.
@@ -151,7 +155,7 @@ public class HttpResponse {
     public int getStatusCode() {
         return wrappedResponse.getStatusLine().getStatusCode();
     }
-    
+
     /**
      * Returns the input stream associated with response content
      * @return the input stream associated with response content
@@ -161,15 +165,15 @@ public class HttpResponse {
         HttpEntity entity = wrappedResponse.getEntity();
         return entity.getContent();
     }
-    
-    /** 
-     * Returns content encoding. 
+
+    /**
+     * Returns content encoding.
      * @return content encoding.
      */
     public String getContentEncoding() {
         return wrappedResponse.getEntity().getContentEncoding().getValue();
     }
-    
+
     /**
      * Returns content length
      * @return content length
@@ -177,7 +181,28 @@ public class HttpResponse {
     public long getContentLength() {
         return wrappedResponse.getEntity().getContentLength();
     }
-    
+
+    public HttpCookie getCookie(String name) {
+        if (cookieMap == null) {
+            cookieMap = new LinkedHashMap<>();
+
+            for (Header header : wrappedResponse.getAllHeaders()) {
+                if (header.getName().toLowerCase().equals("set-cookie")) {
+                    HttpCookie cookie = cookieMap.get(name);
+
+                    if (cookie == null) {
+                        cookie = new HttpCookie();
+                        cookieMap.put(name, cookie);
+                    }
+
+                    cookie._setValues(header.getValue());
+                }
+            }
+        }
+
+        return cookieMap.get(name);
+    }
+
     /**
      * Returns content type
      * @return content type
@@ -185,8 +210,8 @@ public class HttpResponse {
     public String getContentType() {
         return wrappedResponse.getEntity().getContentType().getValue();
     }
-        
-    /** 
+
+    /**
      * Return response locale.
      * @return response locale.
      */
@@ -214,10 +239,10 @@ public class HttpResponse {
                 return header;
             }
         }
-        
+
         return null;
     }
-    
+
     /**
      * Returns all headers
      * @return all the headers of this message.
@@ -231,11 +256,11 @@ public class HttpResponse {
             }
             headers = Collections.unmodifiableList(_headers);
         }
-        
-        
+
+
         return headers;
     }
-    
+
     /**
      * Returns all headers with given name.
      * @param name header name
@@ -243,16 +268,16 @@ public class HttpResponse {
      */
     public List<HttpHeader> getHeaders(String name) {
         List<HttpHeader> filteredHeaders = new LinkedList<>();
-        
+
         for (HttpHeader header : getHeaders()) {
             if (header.getName().equals(name)) {
                 filteredHeaders.add(header);
             }
         }
-        
+
         return Collections.unmodifiableList(filteredHeaders);
     }
-    
+
     /**
      * Closes this response
      * @throws IOException if an I/O error happened during response closing.
